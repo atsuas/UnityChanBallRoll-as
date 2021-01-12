@@ -6,12 +6,14 @@ public class PlayerController : MonoBehaviour
 {
     Rigidbody rb;
     public float speed;
+    int count;
 
     // Start is called before the first frame update
     void Start()
     {
         //rbにRigitbodyを代入する
         rb = GetComponent<Rigidbody>();
+        count = 0;
     }
 
     // Update is called once per frame
@@ -31,5 +33,7 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         other.gameObject.SetActive(false);
+        count = count + 1;
+        Debug.Log(count);
     }
 }
