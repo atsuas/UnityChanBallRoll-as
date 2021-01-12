@@ -27,4 +27,9 @@ public class PlayerController : MonoBehaviour
         //  変数rbにmoveを入れる
         rb.AddForce(move * speed);
     }
+    //アイテムに触れた瞬間に消す
+    private void OnTriggerEnter(Collider other)
+    {
+        other.gameObject.SetActive(false);
+    }
 }
