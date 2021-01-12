@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;  //シーンを操作する際に必要
 
 public class PlayerController : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class PlayerController : MonoBehaviour
         //rbにRigitbodyを代入する
         rb = GetComponent<Rigidbody>();
         count = 0;
-        countText.text = "ゲット数:" + count.ToString();  //Tostringをつけて文字を数値に変換
+        SetCountText();  
     }
 
     // Update is called once per frame
@@ -35,8 +36,25 @@ public class PlayerController : MonoBehaviour
     //アイテムに触れた瞬間に消す
     private void OnTriggerEnter(Collider other)
     {
-        other.gameObject.SetActive(false);
-        count = count + 1;
+        //アイテムと落下時の壁の接触を分ける
+        if (other.gameObject.CompareTag("Item"))
+        {
+            other.gameObject.SetActive(false);
+            count = count + 1;
+            SetCountText();
+        }
+        else if (other.gameObject.CompareTag("Bottom"))
+        {
+            //シーンを読み込む際のスクリプト
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        
+    }
+    //メソッドを定義する
+    void SetCountText()
+    {
+        //Tostringをつけて文字を数値に変換
         countText.text = "ゲット数:" + count.ToString();
     }
 }
