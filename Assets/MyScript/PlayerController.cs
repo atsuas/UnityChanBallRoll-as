@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public float speed;
     int count;
     public Text countText;  //カウントテキストの宣言
+    AudioSource getSE;
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +18,8 @@ public class PlayerController : MonoBehaviour
         //rbにRigitbodyを代入する
         rb = GetComponent<Rigidbody>();
         count = 0;
-        SetCountText();  
+        SetCountText();
+        getSE = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -42,6 +44,7 @@ public class PlayerController : MonoBehaviour
             other.gameObject.SetActive(false);
             count = count + 1;
             SetCountText();
+            getSE.Play();
         }
         else if (other.gameObject.CompareTag("Bottom"))
         {
