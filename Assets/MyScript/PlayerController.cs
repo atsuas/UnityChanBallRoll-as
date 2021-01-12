@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
     Rigidbody rb;
     public float speed;
     int count;
+    public Text countText;  //カウントテキストの宣言
 
     // Start is called before the first frame update
     void Start()
@@ -14,6 +16,7 @@ public class PlayerController : MonoBehaviour
         //rbにRigitbodyを代入する
         rb = GetComponent<Rigidbody>();
         count = 0;
+        countText.text = "ゲット数:" + count.ToString();  //Tostringをつけて文字を数値に変換
     }
 
     // Update is called once per frame
@@ -34,6 +37,6 @@ public class PlayerController : MonoBehaviour
     {
         other.gameObject.SetActive(false);
         count = count + 1;
-        Debug.Log(count);
+        countText.text = "ゲット数:" + count.ToString();
     }
 }
